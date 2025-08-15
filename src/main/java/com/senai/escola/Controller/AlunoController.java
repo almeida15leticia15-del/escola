@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(" /alunos")
+@RequestMapping("/{alunos}")
 public class AlunoController {
     private final AlunoService alunoService;
 
@@ -21,19 +21,24 @@ public class AlunoController {
         return alunoService.buscarTodosAlunos();
     }
 
+
     @PostMapping
-    public Aluno salvar(@RequestBody Aluno aluno {
+    public Aluno salvar(@RequestBody Aluno aluno) {
         return alunoService.salvarNovoAluno(aluno);
     }
 
 
-    @DeleteMapping
-    public void excluirAluno(Long id){
-        alunoService.deletarAluno(id);
+   
+    @GetMapping("/{id}")
+    public Aluno buscaralunoId(@PathVariable Long id){
+        return alunoService.buscarAlunoId(id);
+
     }
 
-    @GetMapping("/{id}")
-    public void buscarAlunoPorId(|@PathVariable Long id){
-        alunoService.buscarAlunoId(id);
+
+    
+    @DeleteMapping("/{id}")
+    public void excluirAluno(@PathVariable Long id){
+        alunoService.deletarAluno(id);
     }
 }
